@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="form" action="">
+    <input type="text" id="name" placeholder="name" /><br />
+    <p id="nameErr"></p>
+    <input type="text" id="email" placeholder="email" /><br />
+    <p id="emailErr"></p>
+    <input type="text" id="pass" placeholder="password" /><br />
+    <p id="passErr"></p>
+    
+    
+    <button id="sub">submit</button>
+  </form>
+  <script>
+   const name = document.getElementById("name");
+
+const nameErr = document.getElementById("nameErr");
+const email = document.getElementById("email");
+
+const emailErr = document.getElementById("emailErr");
+const pass = document.getElementById("pass");
+
+const passErr = document.getElementById("passErr");
+
+const btn = document.getElementById("sub");
+const validate=(e)=>{
+  e.preventDefault();
+  if(name.value==""){
+    nameErr.innerText="name must not be empty"
+  }
+  if(email.value==""){
+    emailErr.innerText="email must not be empty"
+  }if(pass.value.length<6){
+    
+    passErr.innerText="password must be min 6 characters "
+  }
+}
+    name.addEventListener("input", (e) => {
+        validate()
+      });
+
+      email.addEventListener("input", (e) => {
+        validate()
+      });
+      pass.addEventListener("input", (e) => {
+        validate()
+      });
+
+
+      btn.addEventListener("click", (e) => {
+        validate(e)
+      });
+
+    
+  </script>
+</body>
+</html>
