@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Todo</title>
+</head>
+
+<body>
+  <h2>Todo App</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter task" />
+  <button id="addBtn">Add</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    const input = document.getElementById("taskInput");
+    const addBtn = document.getElementById("addBtn");
+    const list = document.getElementById("taskList");
+
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    function save() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function show() {
+      list.innerHTML = "";
+      tasks.forEach((t, i) => {
+        let li = document.createElement("li");
+        li.textContent = t;
+
+        let delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+
+        delBtn.onclick = () => {
+          tasks.splice(i, 1);
+          save();
+          show();
+        };
+
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+
+    addBtn.onclick = () => {
+      if (input.value.trim() === "") return;
+      tasks.push(input.value);
+      input.value = "";
+      save();
+      show();
+    };
+
+    show();
+  </script>
+</body>
+</html>
