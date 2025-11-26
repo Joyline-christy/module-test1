@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="form">
+    <input type="text" id="name" placeholder="name"><br>
+    <p id="nameErr"></p>
+
+    <input type="text" id="email" placeholder="email"><br>
+    <p id="emailErr"></p>
+
+    <input type="password" id="pass" placeholder="password"><br>
+    <p id="passErr"></p>
+    
+    <button id="sub">submit</button>
+  </form>
+
+  <script>
+    const name = document.getElementById("name");
+    const nameErr = document.getElementById("nameErr");
+
+    const email = document.getElementById("email");
+    const emailErr = document.getElementById("emailErr");
+
+    const pass = document.getElementById("pass");
+    const passErr = document.getElementById("passErr");
+
+    const btn = document.getElementById("sub");
+
+    const validate = () => {
+      let valid = true;
+
+      
+      if (name.value.trim() === "") {
+        nameErr.innerText = "Name must not be empty";
+        valid = false;
+      } else {
+        nameErr.innerText = "";
+      }
+
+     
+      if (email.value.trim() === "") {
+        emailErr.innerText = "Email must not be empty";
+        valid = false;
+      } else {
+        emailErr.innerText = "";
+      }
+
+     
+      if (pass.value.length < 6) {
+        passErr.innerText = "Password must be at least 6 char";
+        valid = false;
+      } else {
+        passErr.innerText = "";
+      }
+
+      return valid;
+    };
+
+    
+    name.addEventListener("input", validate);
+    email.addEventListener("input", validate);
+    pass.addEventListener("input", validate);
+
+   
+    btn.addEventListener("click", (e) => {
+      if (!validate()) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
